@@ -1,0 +1,5 @@
+
+> lihuo-paper-review@1.0.0 verify
+> node scripts/verify-structure.mjs
+
+Structure verification passed (30 required artifacts).

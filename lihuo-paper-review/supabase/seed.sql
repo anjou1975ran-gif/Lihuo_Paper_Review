@@ -1,0 +1,1 @@
+-- Intentionally empty. The production database must not ship with fictional cases.

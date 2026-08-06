@@ -1,0 +1,6 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+
+export const metadata: Metadata = { title: "醫學論文審查" };
+const fields = ["Medical Evidence Admissibility", "Clinical Use Readiness", "Evidence Grounding", "Clinical Translation Risk", "Patient Safety Boundary", "External Validation", "Calibration", "Subgroup Validation", "Prospective Validation", "Regulatory Boundary"];
+export default function Page(){ return <div className="container-shell py-14"><div className="kicker">LIHUO MedReview</div><h1 className="mt-3 text-4xl font-black text-[var(--navy)]">醫學論文審查強化版</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-700">LIHUO MedReview 是通用論文審查主體的醫學強化分支。它不取代醫師、統計專家、期刊或主管機關，而是把論文的學術可發表性、醫療證據准入與臨床部署資格分開判斷。</p><div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">{fields.map((a,i)=><div className="card p-5" key={a}><div className="text-blue-700 font-black">{String(i+1).padStart(2,'0')}</div><div className="mt-2 font-extrabold text-[var(--navy)]">{a}</div></div>)}</div><div className="mt-10 flex gap-3 flex-wrap"><Link className="btn btn-primary" href="/cases?type=MEDICAL_PAPER_REVIEW">瀏覽醫學論文案例</Link><Link className="btn btn-secondary" href="/paper-review">查看通用主體</Link></div></div> }

@@ -1,0 +1,5 @@
+import { NextResponse } from "next/server";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { getCurrentAdmin } from "@/lib/auth";
+import { DEFAULT_BUCKET } from "@/lib/constants";
+export async function GET(_request:Request,{params}:{params:Promise<{id:string}>}){const {id}=await params;const admin=createAdminClient();const row=await admin.from('case_documents').select('file_path,public_download_allowed,cases(publication_status)').eq('id',id).single();if(row.error||!row.data)return NextResponse.json({error:'Not found'},{status:404});const isAdmin=Boolean(await getCurrentAdmin());const caseRecord=Array.isArray(row.data.cases)?row.data.cases[0]:row.data.cases as any;const publicAllowed=caseRecord?.publication_status==='PUBLISHED'&&row.data.public_download_allowed;if(!isAdmin&&!publicAllowed)return NextResponse.json({error:'Forbidden'},{status:403});const bucket=process.env.DOCUMENT_BUCKET||DEFAULT_BUCKET;const signed=await admin.storage.from(bucket).createSignedUrl(row.data.file_path,60,{download:true});if(signed.error)return NextResponse.json({error:signed.error.message},{status:400});return NextResponse.redirect(signed.data.signedUrl);}
