@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: lihuо-paper-review
+        working-directory: lihuo-paper-review
     env:
       NEXT_PUBLIC_SITE_URL: http://localhost:3000
       NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
@@ -37,8 +37,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: npm
-          cache-dependency-path: lihuо-paper-review/package-lock.json
 
       - name: Install dependencies
         run: npm install
