@@ -1,0 +1,56 @@
+name: LIHUO Paper Review CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lihuo-paper-review/**"
+      - ".github/workflows/lihuo-paper-review-ci.yml"
+  pull_request:
+    paths:
+      - "lihuo-paper-review/**"
+      - ".github/workflows/lihuo-paper-review-ci.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lihuо-paper-review
+    env:
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
+      NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ci-placeholder-publishable-key
+      SUPABASE_SECRET_KEY: ci-placeholder-secret-key
+      ADMIN_EMAILS: admin@example.com
+      DOCUMENT_BUCKET: case-documents
+      MAX_UPLOAD_MB: "20"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: lihuо-paper-review/package-lock.json
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Verify required structure
+        run: npm run verify
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
