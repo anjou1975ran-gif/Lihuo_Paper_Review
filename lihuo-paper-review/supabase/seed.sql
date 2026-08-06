@@ -1,1 +1,4 @@
--- Intentionally empty. The production database must not ship with fictional cases.
+-- Intentionally empty.
+-- The initial production deployment must not include demonstration, fictional,
+-- LIHUO MedReview, or other case data.
+-- Real cases are added manually by an authenticated administrator after launch.
