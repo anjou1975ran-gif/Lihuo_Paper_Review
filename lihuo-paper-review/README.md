@@ -2,6 +2,17 @@
 
 正式、可部署的論文審查案例展示平台，包含管理員後台、案例上傳、一般／醫學論文模式、普通 AI 與理火審查比較、Supabase 資料庫與私有檔案儲存。
 
+## 空白上線原則
+
+本專案預設以空白資料庫上線：
+
+- 不附帶示範案例；
+- 不自動匯入 LIHUO MedReview 樣本；
+- 不建立虛構論文、虛構審查或預填內容；
+- `supabase/seed.sql` 必須維持空白；
+- 案例資料由管理員上線後自行新增；
+- 空資料庫時，公開案例頁應顯示乾淨的空狀態。
+
 ## 技術架構
 
 - Next.js 16 App Router + TypeScript
@@ -59,6 +70,7 @@ cp .env.example .env.local
 ```
 
 必要值：
+- `NEXT_PUBLIC_SITE_URL`
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
 - `SUPABASE_SECRET_KEY`（只可放在伺服器環境）
@@ -122,8 +134,8 @@ npm run build
 
 ## Vercel 部署
 
-1. 將專案推送至 Git repository。
-2. 在 Vercel Import Project。
+1. 在 Vercel 匯入 `anjou1975ran-gif/Lihuo_Paper_Review`。
+2. 將 Root Directory 設為 `lihuo-paper-review`。
 3. 設定上述環境變數。
 4. Build command 使用 `npm run build`，Output 由 Next.js 自動判斷。
 5. 部署後把 `NEXT_PUBLIC_SITE_URL` 改為正式網域。
