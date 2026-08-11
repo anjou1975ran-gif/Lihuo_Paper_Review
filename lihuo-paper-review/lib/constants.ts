@@ -2,8 +2,41 @@ export const CASE_TYPES = ["GENERAL_PAPER_REVIEW", "MEDICAL_PAPER_REVIEW"] as co
 export const PUBLICATION_STATUSES = ["DRAFT", "UNDER_REVIEW", "PUBLISHED", "ARCHIVED", "WITHDRAWN"] as const;
 export const DOCUMENT_ROLES = ["PAPER_SOURCE", "ORDINARY_AI_REVIEW", "LIHUO_REVIEW"] as const;
 export const REVIEW_TYPES = ["ORDINARY_AI", "LIHUO"] as const;
-export const GENERAL_STATUSES = ["PASS", "LIMIT", "HOLD", "FAIL", "PARTIAL", "NOT_ASSESSED", "NOT_APPLICABLE", "UNAUDITABLE"] as const;
+
+// R1 exports axis-specific status vocabularies. The form uses one shared selector,
+// so this union must preserve every legal value emitted by the review adapter.
+export const GENERAL_STATUSES = [
+  "PASS",
+  "LIMIT",
+  "HOLD",
+  "FAIL",
+  "PARTIAL",
+  "NOT_ASSESSED",
+  "NOT_APPLICABLE",
+  "UNAUDITABLE",
+  "INSUFFICIENT",
+  "INVALID",
+  "AUTHORIZED",
+  "UNAUTHORIZED",
+  "ESTABLISHED",
+  "WORKING",
+  "STRONG",
+  "LIMITED",
+  "WEAK",
+  "MISSING",
+  "CANDIDATE",
+  "METAPHOR_ONLY",
+  "TESTABLE",
+  "NOT_OPERATIONALIZED",
+  "EXPLICIT",
+  "SELF_PROTECTIVE",
+  "COMPLETE_WITHIN_SCOPE",
+] as const;
+
 export const MEDICAL_ADMISSIBILITY = [
+  "PARTIAL",
+  "HOLD",
+  "NOT_ASSESSED",
   "NOT_CLINICALLY_ADMISSIBLE",
   "STRUCTURALLY_REVIEWABLE_ONLY",
   "EVIDENCE_CHAIN_LIMITED",
@@ -13,6 +46,8 @@ export const MEDICAL_ADMISSIBILITY = [
   "ADMISSIBLE_WITH_BOUNDARY",
 ] as const;
 export const CLINICAL_READINESS = [
+  "HOLD",
+  "NOT_ASSESSED",
   "NOT_READY",
   "RESEARCH_ONLY",
   "TRIAGE_ONLY",
@@ -22,6 +57,10 @@ export const CLINICAL_READINESS = [
   "CLINICALLY_ADMISSIBLE_WITH_BOUNDARY",
 ] as const;
 export const EVIDENCE_GROUNDING = [
+  "LOW",
+  "MODERATE",
+  "HIGH",
+  "NOT_ASSESSED",
   "OBSERVED_IN_TEXT",
   "DIRECT_NUMERIC_CONFLICT",
   "METHOD_RISK_INFERRED",
