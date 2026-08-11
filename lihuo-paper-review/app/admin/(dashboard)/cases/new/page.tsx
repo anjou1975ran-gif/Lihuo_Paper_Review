@@ -1,2 +1,5 @@
-import { CaseForm } from "@/components/admin/case-form";
-export default function Page(){return <CaseForm/>}
+import { CaseCreateWorkspace } from "@/components/admin/case-create-workspace";
+
+export default function Page() {
+  return <CaseCreateWorkspace />;
+}
