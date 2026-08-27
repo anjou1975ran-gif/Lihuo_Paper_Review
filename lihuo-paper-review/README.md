@@ -23,6 +23,28 @@
 
 Supabase 官方目前建議 Next.js SSR 使用 `@supabase/ssr`，並以 publishable key 建立瀏覽器／SSR client；本專案依此結構實作。服務端 secret 僅用於經過管理員或公開下載權限檢查後的資料操作與短效 signed URL。
 
+## 現行理火規格與接線
+
+本 repository 的論文審查**資料語義與案例輸出規格**目前對標：
+
+- LIHUO Paper Review System **V3.0-EXP-QS-R3**
+- LIHUO PROTOCOL **V2.3**
+- LIHUO LIGHTER **V3.5-EXP**
+- LIHUO AI SYSTEM **V3.5-EXP**
+- DAIL-LIHUO Runtime Authoring Profile **2.0-EXP**
+- LIHUO MedReview Agent **v0.2**
+
+R3 採 capability-based binding：論文審查垂直層先用 DAIL 表達 WORLD、DIRECTION、BOUNDARY、RESPONSIBILITY 與 semantic capability requirements；Lighter 再依 SAC dependency 解析 Provider。只有需要 SAC 才能以原定義成立的 `MULTI_PATH_RECOMPETITION`、`R_CCC_QS_RECOMPOSITION`、`ENDLESS_RESCAN` 等能力才綁到 Main System V3.5。
+
+目前規格／靜態接線證據為 **E5_GRAPH_AUDITED**；`E6_RUNTIME_TESTED=false`、`E7_HOST_ENFORCED=false`。這些標籤不代表本網站執行完整 LIHUO Runtime。網站仍是案例資料庫、比較與展示層，不加入 live AI API、自動審查或模擬隱藏推理日誌。
+
+相關文件：
+
+- `specs/LIHUO_PAPER_REVIEW_V3.0-EXP-QS-R3.md`
+- `docs/LIHUO_PAPER_REVIEW_DAIL_R3.yaml`
+- `docs/LIHUO_SYSTEM_WIRING_R3.md`
+- `lib/lihuo-system.ts`（網站顯示用的 active version single source of truth）
+
 ## 已建立路徑
 
 公開（繁中）：
@@ -156,6 +178,9 @@ npm run build
 - 檔案 MIME / 大小超限：上傳被拒絕。
 - PDF 檔案簽章不是 `%PDF-`：完成驗證時移除檔案並拒絕建立紀錄。
 - 英文與繁中公開路由可切換。
+- R3 active version profile 必須對標 Protocol V2.3 / Lighter V3.5 / Main V3.5。
+- R3 DAIL 必須保留 `UNKNOWN`、capability/provider 分離、Final Gate 後才允許 Web Export。
+- 驗證腳本不得把 E5 靜態 graph audit 升格成 E6 Runtime tested 或 E7 host enforced。
 
 ## 文件與測試
 
@@ -164,10 +189,13 @@ npm run build
 - 管理員操作：`docs/ADMIN_OPERATIONS.md`
 - 測試紀錄：`docs/TEST_REPORT.md`
 - 規格對照：`docs/REQUIREMENTS_MATRIX.md`
+- LIHUO R3 接線：`docs/LIHUO_SYSTEM_WIRING_R3.md`
+- LIHUO R3 DAIL：`docs/LIHUO_PAPER_REVIEW_DAIL_R3.yaml`
+- LIHUO R3 規格補丁：`specs/LIHUO_PAPER_REVIEW_V3.0-EXP-QS-R3.md`
 - 靜態視覺檢查：`screenshots/`
 
-本次執行環境已完成結構、安全、邏輯、TypeScript 語法，以及以外部套件型別 stub 進行的本地語意／未使用符號檢查。`npm install` 因內部 registry 對 `@supabase/ssr` 回傳 404 而失敗；直接指定公共 registry 的重試也無法解析外部網域，因此 build、lint、完整 framework typecheck 與外部部署不得標記為 PASS。細節見測試報告。
+原始交付時，本地執行環境曾因套件 registry / DNS 問題而無法完成依賴安裝，因此當時的 build、lint、完整 framework typecheck 與外部部署不得標記為 PASS。GitHub CI 若在本次 R3 升版提交上成功，僅代表該提交在 GitHub Actions 的可觀察範圍內通過對應的 install / verify / typecheck / lint / build；仍不等於 Supabase migration、Vercel 外部部署或完整 LIHUO Runtime 已完成。
 
 ## 誠實邊界
 
-此 repository 提供完整應用程式碼、migration、RLS、Storage policy 與部署文件；它不代表 Supabase 專案或 Vercel 部署已在外部帳號中實際建立。只有完成外部環境設定、migration 執行、帳號建立、安裝依賴與部署測試後，才能宣稱正式上線。
+此 repository 提供完整應用程式碼、migration、RLS、Storage policy、R3 規格／接線文件與部署文件；它不代表 Supabase 專案、Vercel 部署或 LIHUO Runtime 已在外部帳號／宿主中實際建立。只有完成外部環境設定、migration 執行、帳號建立、部署與相應 Runtime regression / host evidence 後，才能宣稱對應層級已完成。
