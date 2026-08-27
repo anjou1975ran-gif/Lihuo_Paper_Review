@@ -1,3 +1,5 @@
+import { LIHUO_SYSTEM_PROFILE } from "@/lib/lihuo-system";
+
 type AnyRecord = Record<string, any>;
 
 export type WebCasePacketParseResult = {
@@ -233,7 +235,7 @@ export function parseWebCaseUploadPacket(text: string): WebCasePacketParseResult
 
   const lihuoPatch: AnyRecord = {
     system_name: caseType === "MEDICAL_PAPER_REVIEW" ? "LIHUO MedReview" : "LIHUO Paper Review System",
-    system_version: meta.engineVersion || "3.0-EXP-QS-R1",
+    system_version: meta.engineVersion || LIHUO_SYSTEM_PROFILE.paperReview,
   };
   if (meta.runtimeProfile) lihuoPatch.reasoning_mode = meta.runtimeProfile;
   if (meta.reviewDate) lihuoPatch.review_date = meta.reviewDate;
@@ -305,7 +307,7 @@ export function parseWebCaseUploadPacket(text: string): WebCasePacketParseResult
     if (value === null || value === undefined || value === "") return 0;
     if (Array.isArray(value)) return value.length ? 1 : 0;
     if (typeof value !== "object") return 1;
-    return Object.values(value).reduce((sum, item) => sum + countLeaves(item), 0);
+    return Object.values(value as Record<string, unknown>).reduce<number>((sum, item) => sum + countLeaves(item), 0);
   };
   importedFields = countLeaves(patch);
 
