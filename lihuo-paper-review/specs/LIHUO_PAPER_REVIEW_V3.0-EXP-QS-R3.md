@@ -126,3 +126,13 @@ The website is a database/presentation/export target. `WEB_CASE_EXPORT` projects
 ## 7. Current evidence claim
 
 This patch and its DAIL/binding documents have been statically graph-audited to **E5_GRAPH_AUDITED**. No runtime-regression or host-enforcement claim is made. E6 and E7 remain false until independently observable evidence exists.
+
+## 8. Non-executable reference placement
+
+The new upstream repository also contains theory and miscellany documents. They are deliberately **not** converted into executable providers merely because they are loaded or cited.
+
+- **LIHUO Miscellany V2.8**: engineering handbook / worldview and observation source. It has no normative, module, runtime, or host-wiring authority. Its wiring and DAIL lessons explain why the R3 graph is designed this way; they are not deployment evidence.
+- **LIHUO Theoretical Corpus V4.0** and structural/generative/field/quantum-state theory drafts: theoretical reference layer only. They may align vocabulary and conceptual provenance but do not acquire Runtime authority or physical-quantum status by inclusion.
+- **LIHUO MedReview Agent v0.2** is different: it is a defined medical evidence vertical provider, but only within its medical evidence-admissibility scope. It does not own SAC, Main System, Final Classicalization, or clinical truth.
+
+The resulting rule is: **Miscellany explains the engineering lessons; Lighter V3.5 defines legal wiring; Main System V3.5 provides SAC-dependent capabilities; theory corpus remains theory; MedReview remains a bounded vertical provider.**
