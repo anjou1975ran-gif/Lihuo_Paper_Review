@@ -80,7 +80,6 @@ export function CaseCreateWorkspace() {
       setMessage("請先上傳或貼上純文字內容。");
       return;
     }
-    const base = createBlankPayload();
     applyPatch({
       case: {
         case_type: "GENERAL_PAPER_REVIEW",
@@ -104,7 +103,7 @@ export function CaseCreateWorkspace() {
         <div className="kicker">Case Intake</div>
         <h1 className="mt-2 text-3xl font-black text-[var(--navy)]">資料上傳方式</h1>
         <p className="mt-3 muted max-w-4xl">
-          選擇標準回報包時，網站只把 R1 的 WEB CASE UPLOAD PACKET 投影到既有欄位；不重新審查、不補造缺失資料，也不自動發布。
+          選擇標準回報包時，網站只把 R3 繼承的 WEB CASE UPLOAD PACKET 投影到既有欄位；不重新審查、不補造缺失資料，也不自動發布。
           普通文件模式則保留一個單純、可閱讀、可編輯的純文字空間。
         </p>
 
@@ -129,7 +128,7 @@ export function CaseCreateWorkspace() {
 
         {mode === "packet" ? (
           <div className="mt-5 rounded-2xl border border-slate-200 p-5 bg-slate-50">
-            <label className="font-extrabold text-[var(--navy)]">上傳 R1 標準回報檔</label>
+            <label className="font-extrabold text-[var(--navy)]">上傳 R3 相容標準回報檔</label>
             <input
               className="input mt-3"
               type="file"
